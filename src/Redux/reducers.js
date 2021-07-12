@@ -1,7 +1,8 @@
 import {
   CREATE_TODO,
-  REMOVE_TODO
-} from './constants'; 
+  REMOVE_TODO,
+  MARK_COMPLETE
+} from './constants.js'; 
 
 export const todos = (state = [], action) => {
   const { type, payload } = action;
@@ -22,6 +23,20 @@ export const todos = (state = [], action) => {
       const { text } = payload;
 
       return state.filter(todo => todo.text !== text);
+    }
+
+    case MARK_COMPLETE: {
+      const { text } = payload;
+      
+      return state.map(todo => {
+        if (todo.text === text) {
+          return {
+            ...todo,
+            isCompleted: true
+          }
+        }
+        return todo;
+      });
     }
 
     default:
