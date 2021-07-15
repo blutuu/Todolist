@@ -7,27 +7,28 @@ import {
   LOAD_TODOS_FAILURE
 } from './constants.js'; 
 
-export const createTodo = text => ({
+export const createTodo = todo => ({
   type: CREATE_TODO,
-  payload: { text }
+  payload: { todo }
 });
 
-export const removeTodo = text => ({
+export const removeTodo = todo => ({
   type: REMOVE_TODO,
-  payload: { text }
+  payload: { todo }
 });
 
-export const markTodoComplete = text => ({
+export const markTodoComplete = todo => ({
   type: MARK_COMPLETE,
-  payload: { text }
+  payload: { todo }
 });
 
 export const loadTodosInProgress = () => ({
   type: LOAD_TODOS_IN_PROGRESS,
 });
 
-export const loadTodosSuccess = () => ({
+export const loadTodosSuccess = todos => ({
   type: LOAD_TODOS_SUCCESS,
+  payload: { todos }
 });
 
 export const loadTodosFailure = () => ({

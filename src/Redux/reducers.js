@@ -1,44 +1,79 @@
 import {
   CREATE_TODO,
   REMOVE_TODO,
-  MARK_COMPLETE
-} from './constants.js'; 
+  MARK_COMPLETE,
+  LOAD_TODOS_IN_PROGRESS,
+  LOAD_TODOS_SUCCESS,
+  LOAD_TODOS_FAILURE
+} from './constants.js';
 
-export const todos = (state = [], action) => {
+const initialState = {
+  isLoading: false,
+  data: []
+}
+
+export const todos = (state = initialState, action) => {
   const { type, payload } = action;
 
   switch(type) {
     
     case CREATE_TODO: {
-      const { text } = payload;
-      const newTodo = {
-        text,
-        isCompleted: false
-      };
+      const { todo } = payload;
 
-      return state.concat(newTodo);
+      return {
+        ...state,
+        data: state.data.concat(todo)
+      };
     }
 
     case REMOVE_TODO: {
-      const { text } = payload;
+      const { todo: todoToRemove } = payload;
 
-      return state.filter(todo => todo.text !== text);
+      return {
+        ...state,
+        data: state.data.filter(todo => todo.id !== todoToRemove.id)
+      }
     }
 
     case MARK_COMPLETE: {
-      const { text } = payload;
+      const { todo: todoToUpdate } = payload;
       
-      return state.map(todo => {
-        if (todo.text === text) {
-          return {
-            ...todo,
-            isCompleted: true
+      return {
+        ...state,
+        data: state.data.map(todo=> {
+          if (todo.id === todoToUpdate.id) {
+            return {
+              ...todoToUpdate
+            }
           }
-        }
-        return todo;
-      });
+          return todo;
+        })
+      }
     }
 
+    case LOAD_TODOS_SUCCESS: {
+      const { todos } = payload;
+
+      return {
+        ...state,
+        isLoading: false,
+        data: todos
+      };
+    }
+
+    case LOAD_TODOS_IN_PROGRESS: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+    case LOAD_TODOS_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+      };
+    }
+      
     default:
       return state;
   }

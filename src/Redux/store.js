@@ -7,7 +7,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { todos } from './reducers'; 
 
 const reducers = {
-  todos,
+  todos
 }; 
 const persistConfig = {
   key: 'root',

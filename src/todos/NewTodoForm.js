@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { createTodo } from '../Redux/actions';
+import { getTodos } from './Selectors';
+import { addTodoRequest } from '../Redux/thunks';
 import '../Styles/NewTodoForm.css'; 
 
 const mapStateToProps = state => ({
-  todos: state.todos
+  todos: getTodos(state)
 });
 
 const mapDispatchToProps = dispatch => ({
-  onCreatePressed: text => dispatch(createTodo(text))
+  onCreatePressed: text => dispatch(addTodoRequest(text))
 });
 
 const NewTodoForm = ({ todos, onCreatePressed }) => {
