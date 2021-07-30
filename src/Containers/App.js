@@ -1,4 +1,9 @@
 import TodoList from '../todos/TodoList';
+import styled from 'styled-components';
+
+const AppContainer = styled.div`
+
+`;
 
 function App() {
   return (
