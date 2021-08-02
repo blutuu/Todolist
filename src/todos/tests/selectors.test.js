@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-import { fake } from 'sinon';
 import { getCompletedTodos } from '../Selectors';
 
 describe('The getCompletedTodos selector', () => {
