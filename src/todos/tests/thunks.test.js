@@ -16,7 +16,8 @@ describe('The loadTodos thunk', () => {
       type: 'LOAD_TODOS_SUCCESS', 
       payload: {
         todos: fakeTodos
-    } };
+      } 
+    };
 
     await loadTodos()(fakeDispatch);
 
