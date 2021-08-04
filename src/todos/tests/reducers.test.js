@@ -27,11 +27,16 @@ describe('The todos reducer', () => {
       isCompleted: true,
       id: '1234'
     }
+    const myTodo = {text: 'hello', isCompleted: false, id: "1234"};
     const fakeAction = {
       type: 'REMOVE_TODO',
-      payload: fakeTodo
+      payload: {
+        myTodo
+      }
     }
-    const originalState = { isLoading: false, data: [fakeTodo] };
+    const originalState = { isLoading: false, data: [
+      {text: 'hello', isCompleted: false, id: "1234"}
+    ] };
 
     const expected = {
       isLoading: false,

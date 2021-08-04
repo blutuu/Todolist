@@ -28,6 +28,7 @@ export const todos = (state = initialState, action) => {
 
     case REMOVE_TODO: {
       const { todo: todoToRemove } = payload;
+      const todoid = todoToRemove.id
 
       return {
         ...state,
