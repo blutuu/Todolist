@@ -3,7 +3,10 @@ import { todos } from '../../Redux/reducers';
 
 describe('The todos reducer', () => {
   it('Adds a new todo when CREATE_TODO action is received', () => {
-    const fakeTodo = { text: 'hello', isCompleted: false };
+    const fakeTodo = { 
+      text: 'hello', 
+      isCompleted: false 
+  };
     const fakeAction = {
       type: 'CREATE_TODO',
       payload: {
@@ -24,19 +27,23 @@ describe('The todos reducer', () => {
   it('Removes a todo when REMOVE_TODO is received', () => {
     const fakeTodo = {
       text: 'Goodbye',
-      isCompleted: true,
+      isCompleted: false,
       id: '1234'
     }
-    const myTodo = {text: 'hello', isCompleted: false, id: "1234"};
     const fakeAction = {
       type: 'REMOVE_TODO',
       payload: {
-        myTodo
+        todo: fakeTodo
       }
     }
-    const originalState = { isLoading: false, data: [
-      {text: 'hello', isCompleted: false, id: "1234"}
-    ] };
+    const originalState = { 
+      isLoading: false, 
+      data: [{
+        text: 'hello', 
+        isCompleted: false,
+        id: "1234"
+      }]
+    };
 
     const expected = {
       isLoading: false,
@@ -46,4 +53,5 @@ describe('The todos reducer', () => {
 
     expect(actual).to.deep.equal(expected);
   });
+
 });
