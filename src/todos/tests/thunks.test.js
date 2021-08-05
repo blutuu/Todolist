@@ -2,7 +2,7 @@ import 'node-fetch';
 import fetchMock from 'fetch-mock';
 import  { expect } from 'chai';
 import sinon from 'sinon';
-import { loadTodos } from '../../Redux/thunks';
+import { loadTodos, updateTodoRequest } from '../../Redux/thunks';
 
 describe('The loadTodos thunk', () => {
   it('Dispatches the correct actions in the success scenario', async () => {
@@ -25,5 +25,29 @@ describe('The loadTodos thunk', () => {
     expect(fakeDispatch.getCall(1).args[0]).to.deep.equal(expectedSecondAction);
 
     fetchMock.reset();
+  });
+});
+
+describe('The updateTodoRequest thunk', () => {
+  it('Dispatches the specified todo to the correct reducer', async () => {
+    const fakeDispatch = sinon.spy();
+    const fakeTodo = {
+      text: 'test',
+      id: '1234',
+      isComplete: false
+    }
+    const expectedAction = {
+      type: 'MARK_COMPLETE',
+      payload: { fakeTodo }
+    };
+
+    fetchMock.get(`http://localhost:8080/
+    await updateTodoRequest(fakeTodo.id)(fakeDispatch);todos/${fakeTodo.id}`, fakeTodo);
+
+    sinon.spy(console, log);
+    expect(fakeDispatch.getCall(0).args[0]).to.deep.equal(expectedAction);
+
+    fetchMock.reset();
+    
   });
 });
