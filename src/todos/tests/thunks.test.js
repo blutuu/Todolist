@@ -41,11 +41,11 @@ describe('The updateTodoRequest thunk', () => {
       payload: { fakeTodo }
     };
 
-    fetchMock.get(`http://localhost:8080/
-    await updateTodoRequest(fakeTodo.id)(fakeDispatch);todos/${fakeTodo.id}`, fakeTodo);
+    fetchMock.get(`http://localhost:8080/;todos/${fakeTodo.id}`, fakeTodo);
+    await updateTodoRequest(fakeTodo)(fakeDispatch);
 
-    sinon.spy(console, log);
-    expect(fakeDispatch.getCall(0).args[0]).to.deep.equal(expectedAction);
+    
+    expect(fakeDispatch.getCall(0)).to.deep.equal(expectedAction);
 
     fetchMock.reset();
     
